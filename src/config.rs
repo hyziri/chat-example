@@ -9,6 +9,7 @@ pub struct AppConfig {
     postgres_db: String,
     postgres_user: String,
     postgres_password: String,
+    redis_url: String,
 }
 
 impl AppConfig {
@@ -19,6 +20,7 @@ impl AppConfig {
             postgres_db: env_var("POSTGRES_DB")?,
             postgres_user: env_var("POSTGRES_USER")?,
             postgres_password: env_var("POSTGRES_PASSWORD")?,
+            redis_url: env_var("REDIS_URL")?,
         })
     }
 
@@ -40,6 +42,10 @@ impl AppConfig {
 
     pub fn postgres_password(&self) -> &str {
         &self.postgres_password
+    }
+
+    pub fn redis_url(&self) -> &str {
+        &self.redis_url
     }
 }
 

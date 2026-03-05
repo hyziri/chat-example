@@ -10,8 +10,11 @@ mod startup;
 use tera::Tera;
 
 use crate::{
-    config::AppConfig, error::AppError, model::app::AppState, router::create_router,
-    startup::connect_to_database,
+    config::AppConfig,
+    error::AppError,
+    model::app::AppState,
+    router::create_router,
+    startup::{connect_to_database, connect_to_session},
 };
 
 #[tokio::main]
@@ -26,10 +29,11 @@ async fn main() -> Result<(), AppError> {
     // Initialize Tera templates
     let templates = Tera::new("templates/**/*.html").expect("Failed to parse templates");
 
-    let pool = connect_to_database(config).await?;
+    let pool = connect_to_database(&config).await?;
+    let session = connect_to_session(&config).await?;
 
     let state = AppState::new(pool, templates);
-    let app = create_router().with_state(state);
+    let app = create_router().with_state(state).layer(session);
 
     // Start the server
     let address = "127.0.0.1:8080";
