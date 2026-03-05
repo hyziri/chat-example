@@ -31,6 +31,8 @@ pub enum AppError {
     CreateDatabasePool(#[from] deadpool_postgres::CreatePoolError),
     #[error(transparent)]
     Redis(#[from] tower_sessions_redis_store::fred::prelude::Error),
+    #[error(transparent)]
+    Session(#[from] tower_sessions::session::Error),
 }
 
 impl IntoResponse for AppError {

@@ -2,6 +2,7 @@ mod config;
 mod controller;
 mod data;
 mod error;
+mod middleware;
 mod model;
 mod router;
 mod service;
