@@ -5,10 +5,13 @@ use axum::{
 };
 use tera::Context;
 
-use crate::{error::AppError, model::app::AppState};
+use crate::{error::AppError, middleware::auth::AuthenticatedUserId, model::app::AppState};
 
 /// GET / - Render the homepage
 pub async fn index(
+    // TODO: Use user ID to retrieve their chat messages when
+    // chat functionality is added
+    AuthenticatedUserId(_user_id): AuthenticatedUserId,
     State(state): State<AppState>,
     headers: HeaderMap,
 ) -> Result<impl IntoResponse, AppError> {
