@@ -10,7 +10,7 @@ use crate::model::api::ErrorDto;
 #[derive(Error, Debug)]
 pub enum AppError {
     // 5xx Errors
-    #[error("Internal server error: {0}")]
+    #[error("{0}")]
     Internal(String),
     #[error("Missing required environment variable: {0}")]
     MissingEnvVar(String),
@@ -58,6 +58,8 @@ struct InternalServerError<E>(pub E);
 /// A 500 Internal Server Error response with a generic error message JSON body
 impl<E: std::fmt::Display> IntoResponse for InternalServerError<E> {
     fn into_response(self) -> Response {
+        tracing::error!("Internal server error: {}", self.0);
+
         (
             StatusCode::INTERNAL_SERVER_ERROR,
             Json(ErrorDto {

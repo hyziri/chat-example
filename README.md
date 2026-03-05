@@ -4,6 +4,19 @@ This is an example application which demonstrates an end-to-end encrypted cross-
 - Application data is served via HTML as a data attribute encoded as a base64 blob and decrypted via the WebCrypto API which does the majority of end-to-end encryption heavy lifting. 
 - The application is available on desktop using Tauri webview and on mobile using PWAs (progressive web applications) which utilizes service workers & the IndexedDB API for offline interacivity.
 
+## Usage
+
+Prerequisities
+- [Rust](https://rust-lang.org/tools/install/)
+- [Docker](https://docs.docker.com/engine/install/)
+
+Instructions
+1. Clone this repository
+2. Copy `.env.example` to `.env` & set `POSTGRES_PASSWORD=` variable
+3. Start database with `docker compose -f docker-compose.dev.yml up -d`
+3. Run the application with `cargo run`
+4. Go to `http://localhost:8080`
+
 ## Functionality
 - Create a user account with end-to-end encryption & recovery codes
 - Add another user as friend by their username & discriminator (e.g., @hyziri#0000)

@@ -41,72 +41,6 @@
                 background: var(--base-300);
             }
 
-            #page {
-                min-height: 100vh;
-                min-width: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .container {
-                max-width: 1200px;
-                width: 100%;
-                margin: 0 auto;
-                background: var(--base-200);
-                padding: 2rem;
-                border-radius: var(--radius-box);
-            }
-
-            .card {
-                background: var(--base-200);
-                padding: 2rem;
-                border-radius: var(--radius-box);
-                max-width: 450px;
-                width: 100%;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            }
-
-            .card-title {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .form-group {
-                margin-bottom: 1.5rem;
-            }
-
-            .form-group label {
-                display: block;
-                margin-bottom: 0.5rem;
-                color: var(--base-content);
-                font-weight: 500;
-            }
-
-            .form-group input {
-                width: 100%;
-                padding: 0.75rem;
-                border: 1px solid var(--base-300);
-                border-radius: var(--radius-field);
-                background: var(--base-100);
-                color: var(--base-content);
-                font-size: 1rem;
-                transition: border-color 0.2s;
-            }
-
-            .form-group input:focus {
-                outline: none;
-                border-color: var(--primary);
-            }
-
-            .form-group small {
-                display: block;
-                margin-top: 0.25rem;
-                font-size: 0.875rem;
-            }
-
             /* Text Styles */
             h1 {
                 color: var(--base-content);
@@ -138,78 +72,28 @@
                 list-style: none;
             }
 
-            /* Button Styles */
-            .btn {
-                padding: 0.5rem 1rem;
-                border: none;
-                border-radius: var(--radius-field);
-                cursor: pointer;
-                color: var(--base-content);
-            }
-            .btn:hover {
-                filter: brightness(0.9);
-            }
-            .btn:active {
-                transform: translateY(1px);
-            }
-            .btn:disabled {
-                opacity: 0.6;
-                cursor: not-allowed;
+            /* Base Components */
+            #page {
+                min-height: 100vh;
+                min-width: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .btn-full {
+            .container {
+                max-width: 1200px;
                 width: 100%;
-                padding: 0.875rem;
-                font-size: 1rem;
-                font-weight: 600;
-            }
-
-            /* Button Variants */
-            .btn-primary {
-                background: var(--primary);
-            }
-            .btn-secondary {
-                background: var(--secondary);
-            }
-            .btn-neutral {
-                background: var(--neutral);
-            }
-            .btn-success {
-                background: var(--success);
-            }
-            .btn-danger,
-            .btn-error {
-                background: var(--error);
-            }
-            .btn-warning {
-                background: var(--warning);
-            }
-            .btn-info {
-                background: var(--info);
-            }
-            .btn-accent {
-                background: var(--accent);
-            }
-
-            /* Message */
-            .error-message {
-                padding: 0.75rem;
-                background: var(--error);
-                color: var(--base-content);
-                border-radius: var(--radius-field);
-                margin-bottom: 1rem;
-            }
-
-            .info-message {
-                padding: 0.75rem;
-                background: var(--info);
-                color: var(--base-content);
-                border-radius: var(--radius-field);
-                margin-bottom: 1rem;
+                margin: 0 auto;
+                background: var(--base-200);
+                padding: 2rem;
+                border-radius: var(--radius-box);
             }
         </style>
 
-        {% block styles %}{% endblock %}
+        {% include "components/form.html" %} {% include "components/card.html"
+        %} {% include "components/button.html" %} {% include
+        "components/message.html" %} {% block styles %}{% endblock %}
     </head>
     <body hx-ext="preload">
         <div id="main-content">{% block content %}{% endblock %}</div>

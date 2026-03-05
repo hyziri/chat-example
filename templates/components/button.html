@@ -1,0 +1,54 @@
+<style>
+    /* Button Styles */
+    .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: var(--radius-field);
+        cursor: pointer;
+        color: var(--base-content);
+    }
+    .btn:hover {
+        filter: brightness(0.9);
+    }
+    .btn:active {
+        transform: translateY(1px);
+    }
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .btn-full {
+        width: 100%;
+        padding: 0.875rem;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    /* Button Variants */
+    .btn-primary {
+        background: var(--primary);
+    }
+    .btn-secondary {
+        background: var(--secondary);
+    }
+    .btn-neutral {
+        background: var(--neutral);
+    }
+    .btn-success {
+        background: var(--success);
+    }
+    .btn-danger,
+    .btn-error {
+        background: var(--error);
+    }
+    .btn-warning {
+        background: var(--warning);
+    }
+    .btn-info {
+        background: var(--info);
+    }
+    .btn-accent {
+        background: var(--accent);
+    }
+</style>

@@ -18,6 +18,9 @@ use crate::{
 async fn main() -> Result<(), AppError> {
     dotenvy::dotenv()?;
 
+    // Initialize tracing subscriber for logging
+    tracing_subscriber::fmt::init();
+
     let config = AppConfig::from_env()?;
 
     // Initialize Tera templates
