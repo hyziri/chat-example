@@ -1,0 +1,20 @@
+[package]
+name = "chat_example"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = "0.8.8"
+chrono = { version = "0.4.44", features = ["serde"] }
+deadpool-postgres = { version = "0.14.1", features = ["rt_tokio_1"] }
+dotenvy = "0.15.7"
+serde = "1.0.228"
+tera = "1.20.1"
+thiserror = "2.0.18"
+tokio = "1.50.0"
+tokio-postgres = "0.7.16"
+tower-http = { version = "0.6.8", features = ["compression-gzip"] }
+tower-sessions = "0.15.0"
+tower-sessions-redis-store = "0.16.0"
+tracing = "0.1.44"
+uuid = { version = "1.21.0", features = ["serde"] }

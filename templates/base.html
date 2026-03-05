@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}Chat Example{% endblock %}</title>
+
+        <style>
+            /* CSS Variables for theming */
+            :root {
+                --base-100: oklch(14% 0.005 285.823);
+                --base-200: oklch(21% 0.006 285.885);
+                --base-300: oklch(27% 0.006 286.033);
+                --base-content: oklch(98% 0 0);
+                --primary: oklch(45% 0.25 277.023);
+                --accent: oklch(75% 0.013 285.805);
+                --neutral: oklch(37% 0.013 285.805);
+                --info: oklch(58% 0.158 241.966);
+                --success: oklch(52% 0.154 150.069);
+                --warning: oklch(79% 0.184 86.047);
+                --error: oklch(57% 0.245 27.325);
+                --border: 1px;
+                --radius-box: 0.5rem;
+                --radius-field: 0.25rem;
+                --radius-selector: 0.25rem;
+            }
+
+            /* Reset and Base Styles */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    Oxygen, Ubuntu, Cantarell, sans-serif;
+                line-height: 1.6;
+                color: var(--base-content);
+                background: var(--base-300);
+            }
+
+            #page {
+                min-height: 100vh;
+                min-width: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .container {
+                max-width: 1200px;
+                width: 100%;
+                margin: 0 auto;
+                background: var(--base-200);
+                padding: 2rem;
+                border-radius: var(--radius-box);
+            }
+
+            .card {
+                background: var(--base-200);
+                padding: 2rem;
+                border-radius: var(--radius-box);
+                max-width: 450px;
+                width: 100%;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            .card-title {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--base-content);
+                font-weight: 500;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid var(--base-300);
+                border-radius: var(--radius-field);
+                background: var(--base-100);
+                color: var(--base-content);
+                font-size: 1rem;
+                transition: border-color 0.2s;
+            }
+
+            .form-group input:focus {
+                outline: none;
+                border-color: var(--primary);
+            }
+
+            .form-group small {
+                display: block;
+                margin-top: 0.25rem;
+                font-size: 0.875rem;
+            }
+
+            /* Text Styles */
+            h1 {
+                color: var(--base-content);
+            }
+
+            h2 {
+                color: var(--base-content);
+            }
+
+            h3 {
+                color: var(--base-content);
+            }
+
+            small {
+                color: var(--accent);
+            }
+
+            a {
+                color: var(--primary);
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            /* List Styles */
+            ul {
+                list-style: none;
+            }
+
+            /* Button Styles */
+            .btn {
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: var(--radius-field);
+                cursor: pointer;
+                color: var(--base-content);
+            }
+            .btn:hover {
+                filter: brightness(0.9);
+            }
+            .btn:active {
+                transform: translateY(1px);
+            }
+            .btn:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+
+            .btn-full {
+                width: 100%;
+                padding: 0.875rem;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            /* Button Variants */
+            .btn-primary {
+                background: var(--primary);
+            }
+            .btn-secondary {
+                background: var(--secondary);
+            }
+            .btn-neutral {
+                background: var(--neutral);
+            }
+            .btn-success {
+                background: var(--success);
+            }
+            .btn-danger,
+            .btn-error {
+                background: var(--error);
+            }
+            .btn-warning {
+                background: var(--warning);
+            }
+            .btn-info {
+                background: var(--info);
+            }
+            .btn-accent {
+                background: var(--accent);
+            }
+
+            /* Message */
+            .error-message {
+                padding: 0.75rem;
+                background: var(--error);
+                color: var(--base-content);
+                border-radius: var(--radius-field);
+                margin-bottom: 1rem;
+            }
+
+            .info-message {
+                padding: 0.75rem;
+                background: var(--info);
+                color: var(--base-content);
+                border-radius: var(--radius-field);
+                margin-bottom: 1rem;
+            }
+        </style>
+
+        {% block styles %}{% endblock %}
+    </head>
+    <body hx-ext="preload">
+        <div id="main-content">{% block content %}{% endblock %}</div>
+
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
+            integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/htmx-ext-preload@2.1.2"
+            integrity="sha384-PRIcY6hH1Y5784C76/Y8SqLyTanY9rnI3B8F3+hKZFNED55hsEqMJyqWhp95lgfk"
+            crossorigin="anonymous"
+        ></script>
+
+        <script defer>
+            // HTMX event handlers
+            document.body.addEventListener("htmx:afterSwap", function (event) {
+                // Handle SPA navigation
+                // Check if the swapped element is or was #page
+                if (
+                    event.detail.target.id === "page" ||
+                    event.detail.target.querySelector("#page") ||
+                    document.querySelector("#page")
+                ) {
+                    updatePageTitle();
+                    // Scroll to top on navigation
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            });
+
+            // Update page title from data attribute
+            function updatePageTitle() {
+                // Look for data-page-title attribute in the swapped content
+                const page = document.querySelector("#page");
+                if (page) {
+                    const title = page.getAttribute("data-page-title");
+                    if (title) {
+                        document.title = title;
+                    }
+                }
+            }
+
+            // Handle browser back/forward buttons
+            window.addEventListener("popstate", function (event) {
+                // Load content for the current URL
+                const path = window.location.pathname;
+
+                // Use HTMX to fetch the content
+                htmx.ajax("GET", path, {
+                    target: "#page",
+                    swap: "outerHTML",
+                }).then(() => {
+                    updatePageTitle();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+            });
+        </script>
+
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

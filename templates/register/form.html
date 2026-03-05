@@ -1,0 +1,108 @@
+<div class="card">
+    <div class="card-title">
+        <h2>Create Account</h2>
+        <p style="color: var(--accent)">Sign up to start chatting securely</p>
+    </div>
+
+    <form id="register-form" hx-post="/register" hx-swap="none">
+        <div class="form-group">
+            <label for="register-name">Username *</label>
+            <input
+                type="text"
+                id="register-name"
+                name="name"
+                required
+                placeholder="Enter your username"
+                autofocus
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="register-email">Email *</label>
+            <input
+                type="email"
+                id="register-email"
+                name="email"
+                required
+                placeholder="Enter your email"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="register-password">Password *</label>
+            <input
+                type="password"
+                id="register-password"
+                name="password"
+                required
+                placeholder="Enter your password"
+                minlength="8"
+            />
+            <small>Minimum 8 characters</small>
+        </div>
+
+        <div class="form-group">
+            <label for="register-password-confirm">Confirm Password *</label>
+            <input
+                type="password"
+                id="register-password-confirm"
+                name="password_confirm"
+                required
+                placeholder="Confirm your password"
+            />
+        </div>
+
+        <!-- Hidden fields for E2EE data (populated by JavaScript) -->
+        <input type="hidden" id="password_hash" name="password_hash" />
+        <input type="hidden" id="encryption_salt" name="encryption_salt" />
+        <input
+            type="hidden"
+            id="encrypted_private_key"
+            name="encrypted_private_key"
+        />
+        <input type="hidden" id="public_key" name="public_key" />
+        <input
+            type="hidden"
+            id="auth_verification_data"
+            name="auth_verification_data"
+        />
+        <input
+            type="hidden"
+            id="encrypted_master_key_backup"
+            name="encrypted_master_key_backup"
+        />
+
+        <div
+            id="registration-error"
+            class="error-message"
+            style="display: none"
+        ></div>
+        <div
+            id="registration-status"
+            class="info-message"
+            style="display: none"
+        ></div>
+
+        <div>
+            <button type="submit" class="btn btn-primary btn-full">
+                Create Account
+            </button>
+        </div>
+    </form>
+
+    <div style="color: var(--accent); margin-top: 1.5rem">
+        <p>
+            Already have an account?
+            <a
+                href="/login"
+                hx-get="/login"
+                hx-target="#page"
+                hx-swap="outerHTML"
+                hx-push-url="true"
+                preload="mouseover"
+            >
+                Log in
+            </a>
+        </p>
+    </div>
+</div>
