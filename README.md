@@ -8,14 +8,16 @@ This is an example application which demonstrates an end-to-end encrypted cross-
 
 Prerequisities
 - [Rust](https://rust-lang.org/tools/install/)
+- [Bun](https://bun.sh/)
 - [Docker](https://docs.docker.com/engine/install/)
 
 Instructions
-1. Clone this repository
+1. `git clone` this repository
 2. Copy `.env.example` to `.env` & set `POSTGRES_PASSWORD=` variable
-3. Start database with `docker compose -f docker-compose.dev.yml up -d`
-3. Run the application with `cargo run`
-4. Go to `http://localhost:8080`
+3. Start database & Redis with `docker compose -f docker-compose.dev.yml up -d`
+4. Build frontend JavaScript with `bun run build`
+5. Run the application with `cargo run`
+6. Go to `http://localhost:8080`
 
 ## Functionality
 - Create a user account with end-to-end encryption & recovery codes
@@ -35,8 +37,8 @@ Device targets:
 
 Frontend (JavaScript):
 - Tera with HTML templating for UI
-- HTMX for interactivty & SPA-like page navigation
-- JavaScript for minor interactivity (Such as opening modals)
+- HTMX for data fetching, form submissions, & SPA-like page navigation
+- TypeScript for component interactivity such as opening modals
 - Basic inline CSS for styling
 
 Backend (Rust):

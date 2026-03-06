@@ -1,2 +1,10 @@
-/target
 .env
+
+# Rust build artifacts
+/target
+
+# JavaScript build artifacts
+/static/js/*.js
+/static/js/*.map
+/node_modules
+bun.lockb
