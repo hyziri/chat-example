@@ -2,7 +2,7 @@ use axum::{
     Router, middleware,
     routing::{get, post},
 };
-use tower_http::compression::CompressionLayer;
+use tower_http::{compression::CompressionLayer, services::ServeDir};
 
 use crate::{
     controller::{home, login, register},
@@ -28,6 +28,8 @@ pub fn create_router() -> Router<AppState> {
     Router::new()
         .merge(protected)
         .merge(public)
+        // Serve static files from /static
+        .nest_service("/static", ServeDir::new("static"))
         // Add gzip compression for all responses
         .layer(CompressionLayer::new())
 }

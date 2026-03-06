@@ -98,62 +98,7 @@
     <body hx-ext="preload">
         <div id="main-content">{% block content %}{% endblock %}</div>
 
-        <script
-            defer
-            src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
-            integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            defer
-            src="https://cdn.jsdelivr.net/npm/htmx-ext-preload@2.1.2"
-            integrity="sha384-PRIcY6hH1Y5784C76/Y8SqLyTanY9rnI3B8F3+hKZFNED55hsEqMJyqWhp95lgfk"
-            crossorigin="anonymous"
-        ></script>
-
-        <script defer>
-            // HTMX event handlers
-            document.body.addEventListener("htmx:afterSwap", function (event) {
-                // Handle SPA navigation
-                // Check if the swapped element is or was #page
-                if (
-                    event.detail.target.id === "page" ||
-                    event.detail.target.querySelector("#page") ||
-                    document.querySelector("#page")
-                ) {
-                    updatePageTitle();
-                    // Scroll to top on navigation
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-            });
-
-            // Update page title from data attribute
-            function updatePageTitle() {
-                // Look for data-page-title attribute in the swapped content
-                const page = document.querySelector("#page");
-                if (page) {
-                    const title = page.getAttribute("data-page-title");
-                    if (title) {
-                        document.title = title;
-                    }
-                }
-            }
-
-            // Handle browser back/forward buttons
-            window.addEventListener("popstate", function (event) {
-                // Load content for the current URL
-                const path = window.location.pathname;
-
-                // Use HTMX to fetch the content
-                htmx.ajax("GET", path, {
-                    target: "#page",
-                    swap: "outerHTML",
-                }).then(() => {
-                    updatePageTitle();
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                });
-            });
-        </script>
+        <script type="module" src="/static/js/main.js"></script>
 
         {% block scripts %}{% endblock %}
     </body>

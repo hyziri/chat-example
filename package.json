@@ -1,0 +1,21 @@
+{
+  "name": "chat_example",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "bun build assets/ts/main.ts --outdir static/js --minify",
+    "build:dev": "bun build assets/ts/main.ts --outdir static/js --sourcemap=inline",
+    "watch": "bun build assets/ts/main.ts --outdir static/js --watch --sourcemap=inline",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "htmx.org": "^2.0.8",
+    "typescript": "^5.9.3"
+  },
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "htmx-ext-preload": "^2.1.2"
+  }
+}
